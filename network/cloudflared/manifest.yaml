@@ -1,0 +1,10 @@
+version: v1alpha1
+metadata:
+  name: cloudflared
+  version: "$VERSION"
+  author: Lucca
+  description: |
+    This system extension installs cloudflared
+  compatibility:
+    talos:
+      version: ">= v1.0.0"

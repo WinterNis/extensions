@@ -1,0 +1,27 @@
+name: cloudflared
+variant: scratch
+shell: /toolchain/bin/bash
+dependencies:
+  - stage: base
+steps:
+  - sources:
+      - url: https://github.com/cloudflare/cloudflared/releases/download/2024.2.1/cloudflared-linux-amd64
+        destination: cloudflared
+        sha256: f140d18894206a45f5150d34066e8940a3bca82a0da670fcb4e6d93b11f0c81c
+        sha512: 1f474e04e69e0a1a6a09b963c5489eae29e80d4febcbd45a2e349112cfc1aa218e9b79c5f8e4b1b53c62f1e615a6f6ce598ddf671b367018ff0031999b127186
+    prepare:
+      - |
+        sed -i 's#$VERSION#{{ .VERSION }}#' /pkg/manifest.yaml
+    install:
+      - |
+        mkdir -p /rootfs/usr/local/etc/containers
+        mkdir -p /rootfs/usr/local/lib/containers/cloudflared
+
+        cp -p ./cloudflared /rootfs/usr/local/lib/containers/cloudflared/
+finalize:
+  - from: /rootfs
+    to: /rootfs
+  - from: /pkg/manifest.yaml
+    to: /
+  - from: /pkg/cloudflared.yaml
+    to: /rootfs/usr/local/etc/containers/

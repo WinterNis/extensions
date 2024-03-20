@@ -63,6 +63,7 @@ TARGETS += bnx2-bnx2x
 TARGETS += btrfs
 TARGETS += chelsio-drivers
 TARGETS += chelsio-firmware
+TARGETS += cloudflared
 TARGETS += drbd
 TARGETS += ecr-credential-provider
 TARGETS += fuse3
@@ -96,7 +97,7 @@ NONFREE_TARGETS = nonfree-kmod-nvidia
 
 # help menu
 
-export define HELP_MENU_HEADER
+define HELP_MENU_HEADER
 # Getting Started
 
 To build this project, you must have the following installed:

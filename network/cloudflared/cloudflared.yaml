@@ -1,0 +1,12 @@
+name: cloudflared
+container:
+  entrypoint: ./cloudflared
+  args:
+    - tunnel
+    - run
+    - --config
+    - /etc/cloudflared/config/config.yaml
+depends:
+  - network:
+      - addresses
+restart: always
